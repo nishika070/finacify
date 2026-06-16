@@ -1,11 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <header class="title">
+        <div class="brand">
+            <div class="branding">
+                <img class="logo" src="./reference/logo.svg" alt="logo"/>
+
+                <div class="head-text">
+                    <h1>FINANCIFY</h1>
+                    <p>Track your spending with ease</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <nav>
+                <a href="index.html">DASHBOARD</a>
+                <a href="income.html">INCOME</a>
+                <a href="expense.html">EXPENSE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="primary-card-non">
+
+            <div class="card">
+                <h3>Total Expenses</h3>
+                <div class="total-expenses" id="total-expenses">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Weekly Average</h3>
+                <div class="weekly-average" id="weekly-average">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Categories</h3>
+                <div class="expense-categories" id="expense-categories">
+                    <p>7</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="secondary-card">
+
+            <div class="card" id="expense-entry">
+
+                <h2>+Add New Expense</h2>
+
+                <div class="card-details">
+                    <h4>Description</h4>
+                    <input
+                        id="expense-desc"
+                        type="text"
+                        placeholder="What was this expense for?"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Amount</h4>
+                    <input
+                        id="expense-amount"
+                        type="number"
+                        placeholder="0.00"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Date</h4>
+                    <input
+                        id="expense-date"
+                        type="date"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Category</h4>
+
+                    <select
+                        class="expense-category"
+                        id="expense-category"
+                    >
+                        <option value="Food">Food</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Health">Health</option>
+                        <option value="Bills">Bills</option>
+                        <option value="Education">Education</option>
+                        <option value="Entertainment">Entertainment</option>
+                    </select>
+                </div>
+
+                <button
+                    class="card-button"
+                    id="add-expense-btn"
+                >
+                    +Add Expense
+                </button>
+
+            </div>
+
+            <div class="card">
+
+                <div class="search-bar">
+                    <h2>Expense Record</h2>
+
+                    <input
+                        id="expense-search"
+                        type="search"
+                        placeholder="Search"
+                    >
+                </div>
+
+                <ul id="expense-list">
+                </ul>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./js/expense.js"></script>
+
 </body>
 </html>

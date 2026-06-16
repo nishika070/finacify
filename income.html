@@ -1,11 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Income Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <header class="title">
+        <div class="brand">
+            <div class="branding">
+                <img class="logo" src="./reference/logo.svg" alt="logo" />
+                <div class="head-text">
+                    <h1>FINANCIFY</h1>
+                    <p>Track your spending with ease</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <nav>
+                <a href="index.html">DASHBOARD</a>
+                <a href="income.html">INCOME</a>
+                <a href="expense.html">EXPENSE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="primary-card-non">
+
+            <div class="card">
+                <h3>Total Income</h3>
+                <div class="total-income" id="total-income">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Weekly Income</h3>
+                <div class="weekly-income" id="weekly-income">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Sources</h3>
+                <div class="income-sources" id="income-sources">
+                    <p>5</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="secondary-card">
+
+            <div class="card" id="income-entry">
+
+                <h2>+Add New Income</h2>
+
+                <div class="card-details">
+                    <h4>Description</h4>
+                    <input
+                        id="income-desc"
+                        type="text"
+                        placeholder="What was this income for?"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Amount</h4>
+                    <input
+                        id="income-amount"
+                        type="number"
+                        placeholder="0.00"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Date</h4>
+                    <input
+                        id="income-date"
+                        type="date"
+                    >
+                </div>
+
+                <div class="card-details">
+                    <h4>Category</h4>
+
+                    <select
+                        class="income-category"
+                        id="income-category"
+                    >
+                        <option value="Salary">Salary</option>
+                        <option value="Freelance">Freelance</option>
+                        <option value="Business">Business</option>
+                        <option value="Gift">Gift</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <button
+                    class="card-button"
+                    id="add-income-btn"
+                >
+                    +Add Income
+                </button>
+
+            </div>
+
+            <div class="card">
+
+                <div class="search-bar">
+                    <h2>Income Record</h2>
+
+                    <input
+                        id="income-search"
+                        type="search"
+                        placeholder="Search"
+                    >
+                </div>
+
+                <ul id="income-list">
+                </ul>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="./js/income.js"></script>
 </body>
 </html>

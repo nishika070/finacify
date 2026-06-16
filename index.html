@@ -3,9 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+
+    <header class="title">
+        <div class="brand">
+            <div class="branding">
+                <img class="logo" src="./reference/logo.svg" alt="logo"/>
+
+                <div class="head-text">
+                    <h1>FINANCIFY</h1>
+                    <p>Track your spending with ease</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="navbar">
+            <nav>
+                <a href="index.html">DASHBOARD</a>
+                <a href="income.html">INCOME</a>
+                <a href="expense.html">EXPENSE</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section class="primary-card">
+
+            <div class="card">
+                <h3>Total Income</h3>
+                <div class="total-income" id="total-income">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Total Expenses</h3>
+                <div class="total-expenses" id="total-expenses">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Net Savings</h3>
+                <div class="net-savings" id="net-savings">
+                    <p>0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Savings Rate</h3>
+                <div class="savings-rate" id="savings-rate">
+                    <p>0</p>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="secondary-card">
+
+            <div class="card">
+
+                <div class="search-bar">
+                    <h2>Transaction Record</h2>
+                    <input
+                        id="transaction-search"
+                        type="search"
+                        placeholder="Search"
+                    >
+                </div>
+
+                <ul id="transaction-list">
+                </ul>
+
+            </div>
+
+            <div class="card">
+
+                <div class="search-bar">
+                    <h2>Spending By Category</h2>
+                </div>
+
+                <ul id="category-breakdown-list">
+                </ul>
+
+            </div>
+
+        </section>
+
+        <script src="./js/dashboard.js"></script>
+    </main>
+
 </body>
 </html>
