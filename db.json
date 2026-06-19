@@ -1,0 +1,18 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "title": "Salary",
+      "amount": 50000,
+      "type": "income",
+      "date": "2026-06-19"
+    },
+    {
+      "id": 2,
+      "title": "Food",
+      "amount": 300,
+      "type": "expense",
+      "date": "2026-06-18"
+    }
+  ]
+}

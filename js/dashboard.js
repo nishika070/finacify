@@ -116,3 +116,77 @@ searchButton.addEventListener("input",function(){
 
 
 
+//abb lets build the chart 
+const CategoryTotals={
+
+}
+expenses.forEach(expense=>{
+    
+    if(CategoryTotals[expense.category]){
+        CategoryTotals[expense.category]+=expense.amount;
+    }
+    else{
+        CategoryTotals[expense.category]=expense.amount;
+    }
+
+
+});
+
+const drawChart = () => {
+
+    const labels =
+    Object.keys(CategoryTotals);
+
+    const values =
+    Object.values(CategoryTotals);
+
+    const ctx =
+    document
+    .getElementById("spending-chart")
+    .getContext("2d");
+
+    new Chart(ctx, {
+
+        type: "doughnut",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                label: "Expenses",
+
+                data: values,
+
+                backgroundColor: [
+                    "#4e79a7",
+                    "#f28e2b",
+                    "#e15759",
+                    "#76b7b2",
+                    "#59a14f",
+                    "#edc948",
+                    "#b07aa1"
+                ]
+
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+                    position: "right"
+                }
+
+            }
+        }
+
+    });
+
+};
+
+drawChart();
