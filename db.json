@@ -1,18 +1,8 @@
 {
-  "transactions": [
-    {
-      "id": 1,
-      "title": "Salary",
-      "amount": 50000,
-      "type": "income",
-      "date": "2026-06-19"
-    },
-    {
-      "id": 2,
-      "title": "Food",
-      "amount": 300,
-      "type": "expense",
-      "date": "2026-06-18"
-    }
+  "expenses": [
+    { "id": 1, "desc": "Groceries", "amount": 1200, "category": "Food", "date": "2025-06-01" }
+  ],
+  "incomes": [
+    { "id": 1, "desc": "Salary", "amount": 25000, "date": "2025-06-01" }
   ]
 }

@@ -1,5 +1,8 @@
 //sp isme ek to renderkro list 
 //total income
+const response = fetch("db.json");
+
+console.log("Done");
 const expenses=JSON.parse(localStorage.getItem("expenses"))|| []
 const incomes=JSON.parse(localStorage.getItem("incomes"))|| []
 
