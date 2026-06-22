@@ -246,9 +246,26 @@ nav a:hover{
 ========================= BUTTONS ======================
 ========================================================
 */
+.buttons{
+    display: flex;
+    justify-content: space-around;
+}
+.deletebtn{
+    width: 23%;
+    padding: 14px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background: #5279b0;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
 
+}
 .secondary-card .card-button{
-    width: 100%;
+    width: 23%;
     padding: 14px;
     margin-top: 10px;
     border: none;
@@ -261,7 +278,7 @@ nav a:hover{
     cursor: pointer;
 }
 
-.secondary-card .card-button:hover{
+.secondary-card .card-button:hover,.deletebtn:hover{
     transform: translateY(-2px);
     opacity: 0.90;
 }

@@ -1,88 +1,91 @@
-//sp isme ek to renderkro list 
-//total income
-const response = fetch("db.json");
+async function init() {
+    // fetch both from json-server
+    const expRes  = await fetch("http://localhost:3000/expenses");
+    const incRes  = await fetch("http://localhost:3000/incomes");
 
-console.log("Done");
-const expenses=JSON.parse(localStorage.getItem("expenses"))|| []
-const incomes=JSON.parse(localStorage.getItem("incomes"))|| []
+    // .json() opens the envelope — gives real array
+    const expenses = await expRes.json();
+    const incomes  = await incRes.json();
 
-//func
-const calc_totalIncome=()=>{
-let total=0;
-incomes.forEach(income => {
-    total+=Number(income.amount)
-    
-})
-document.getElementById(
-        "total-income"
-    ).innerHTML =
-        `<p>₹${total.toLocaleString("en-IN")}</p>`;
-    return total;
+    // all functions get data as parameters
+    calc_totalIncome(incomes);
+    calc_totalExpense(expenses);
+    netSaving(incomes, expenses);
+    calc_savingRate(incomes, expenses);
+    drawChart(expenses);
 
-};
-calc_totalIncome();
+    // transactions must be INSIDE init() — expenses/incomes exist only here
+    const transactions = [
+        ...expenses.map(expense => ({ ...expense, type: "expense" })),
+        ...incomes.map(income  => ({ ...income,  type: "income"  }))
+    ];
 
+    transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-//total expense
-const calc_totalExpense=()=>{
-    let total=0;
-    expenses.forEach(expense => {
-        total+=Number(expense.amount)
+    renderlist(transactions);
 
-        
+    // search also inside init() — needs transactions array
+    const searchButton = document.getElementById("transaction-search");
+    searchButton.addEventListener("input", function () {
+        const inputText = searchButton.value.toLowerCase();
+        const newSearch = transactions.filter(transaction =>
+            transaction.desc.toLowerCase().includes(inputText)
+        );
+        renderlist(newSearch);
     });
-    document.getElementById("total-expense").innerHTML=`<p>₹${total.toLocaleString("en-IN")}</p>`;
+
+}
+
+init();
+
+
+// calc total income
+const calc_totalIncome = (incomes) => {
+    let total = 0;
+    incomes.forEach(income => {
+        total += Number(income.amount);
+    });
+    document.getElementById("total-income").innerHTML = `<p>₹${total.toLocaleString("en-IN")}</p>`;
     return total;
 };
-calc_totalExpense();
-const netSaving=()=>{
-    const income=calc_totalIncome();
-    const expense=calc_totalExpense();
-    let saving=income-expense;
-    document.getElementById("net-saving").innerHTML=`<p>₹${saving.toLocaleString("en-IN")}</p>`
+
+
+// calc total expense
+const calc_totalExpense = (expenses) => {
+    let total = 0;
+    expenses.forEach(expense => {
+        total += Number(expense.amount);
+    });
+    document.getElementById("total-expense").innerHTML = `<p>₹${total.toLocaleString("en-IN")}</p>`;
+    return total;
+};
+
+
+// net saving
+const netSaving = (incomes, expenses) => {
+    const income  = calc_totalIncome(incomes);
+    const expense = calc_totalExpense(expenses);
+    let saving = income - expense;
+    document.getElementById("net-saving").innerHTML = `<p>₹${saving.toLocaleString("en-IN")}</p>`;
     return saving;
 };
-netSaving();
 
-const calc_savingRate=()=>{
-    const income=calc_totalIncome();
-    const nsave=netSaving();
-    let per=(nsave/income)*100;
-    document.getElementById("savings-rate").innerHTML= `<p>${per.toFixed(2)}%</p>`
 
-    
-return per;
+// saving rate
+const calc_savingRate = (incomes, expenses) => {
+    const income = calc_totalIncome(incomes);
+    const nsave  = netSaving(incomes, expenses);
+    let per = (nsave / income) * 100;
+    document.getElementById("savings-rate").innerHTML = `<p>${per.toFixed(2)}%</p>`;
+    return per;
 };
 
 
+// render transaction list
+const renderlist = (transactions) => {
+    const tList = document.getElementById("transaction-list");
+    tList.innerHTML = "";
 
-
-calc_savingRate();
-
-
-
-
-const transactions=[
-
-    ...expenses.map(expense=>({
-        ...expense,//all fields same copy like name and all:)
-        type:"expense"
-    })),
-
-    ...incomes.map(income=>({
-        ...income,
-        type:"income"
-    }))
-];
-transactions.sort((a,b)=>{
-    return new Date(b.date)-new Date(a.date)
-
-});
-
-
-const renderlist=(transactions)=>{
-     const tList=document.getElementById("transaction-list");
-    tList.innerHTML="";
     transactions.forEach(transaction => {
         const li          = document.createElement("li");
         const sign        = transaction.type === "income" ? "+" : "-";
@@ -91,7 +94,7 @@ const renderlist=(transactions)=>{
             month: "short",
             day: "numeric"
         });
-    
+
         li.innerHTML = `
             <div class="t-left">
                 <span class="t-desc">${transaction.desc}</span>
@@ -101,67 +104,36 @@ const renderlist=(transactions)=>{
                 ${sign}₹${Number(transaction.amount).toLocaleString("en-IN")}
             </span>
         `;
-    
+
         tList.appendChild(li);
-});
-}
-renderlist(transactions);
-const searchButton=document.getElementById("transaction-search");
-searchButton.addEventListener("input",function(){
-    const inputText=searchButton.value.toLowerCase();
-    const newSearch=
-        transactions.filter(transaction=>
-            transaction.desc.toLowerCase().includes(inputText)
-        );
-    renderlist(newSearch);
+    });
+};
 
-});
+// draw doughnut chart
+// CategoryTotals is an object — NOT a function
+const drawChart = (expenses) => {
+    const CategoryTotals = {};
 
+    expenses.forEach(expense => {
+        if (CategoryTotals[expense.category]) {
+            CategoryTotals[expense.category] += Number(expense.amount);
+        } else {
+            CategoryTotals[expense.category] = Number(expense.amount);
+        }
+    });
 
+    const labels = Object.keys(CategoryTotals);
+    const values = Object.values(CategoryTotals);
 
-//abb lets build the chart 
-const CategoryTotals={
-
-}
-expenses.forEach(expense=>{
-    
-    if(CategoryTotals[expense.category]){
-        CategoryTotals[expense.category]+=expense.amount;
-    }
-    else{
-        CategoryTotals[expense.category]=expense.amount;
-    }
-
-
-});
-
-const drawChart = () => {
-
-    const labels =
-    Object.keys(CategoryTotals);
-
-    const values =
-    Object.values(CategoryTotals);
-
-    const ctx =
-    document
-    .getElementById("spending-chart")
-    .getContext("2d");
+    const ctx = document.getElementById("spending-chart").getContext("2d");
 
     new Chart(ctx, {
-
         type: "doughnut",
-
         data: {
-
             labels: labels,
-
             datasets: [{
-
                 label: "Expenses",
-
                 data: values,
-
                 backgroundColor: [
                     "#4e79a7",
                     "#f28e2b",
@@ -171,25 +143,13 @@ const drawChart = () => {
                     "#edc948",
                     "#b07aa1"
                 ]
-
             }]
         },
-
         options: {
-
             responsive: true,
-
             plugins: {
-
-                legend: {
-                    position: "right"
-                }
-
+                legend: { position: "right" }
             }
         }
-
     });
-
 };
-
-drawChart();
