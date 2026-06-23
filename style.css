@@ -246,6 +246,46 @@ nav a:hover{
 ========================= BUTTONS ======================
 ========================================================
 */
+/*selection of list */
+.selected{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+#left,#right{
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 10px;
+    background: rgb(206, 225, 245);
+    color: #5880b8;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+    cursor: pointer;
+
+}
+#left :hover,#right :hover{
+    background: rgb(176, 202, 228);
+    color: #3f659b;
+    cursor: pointer;
+
+}
+#count{
+    width: 0px;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    
+    border-radius: 10px;
+    color: #5279b0;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+
 .buttons{
     display: flex;
     justify-content: space-around;
@@ -278,6 +318,7 @@ nav a:hover{
     cursor: pointer;
 }
 
+
 .secondary-card .card-button:hover,.deletebtn:hover{
     transform: translateY(-2px);
     opacity: 0.90;
@@ -291,7 +332,7 @@ nav a:hover{
 */
 
 /* Transaction / Income / Expense Lists */
-#transaction-list,
+#transaction-list,#count
 #income-list,
 #expense-list,
 #category-breakdown-list{
@@ -320,6 +361,7 @@ nav a:hover{
 
 .card li:hover{
     transform: translateX(4px);
+    cursor:grab;
 }
 
 

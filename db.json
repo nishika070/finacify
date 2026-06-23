@@ -1,26 +1,154 @@
 {
   "expenses": [
-    { "id": 1,  "desc": "Groceries",        "amount": 3200, "category": "Food",          "date": "2026-06-20" },
-    { "id": 2,  "desc": "Netflix",           "amount": 649,  "category": "Entertainment", "date": "2026-06-18" },
-    { "id": 3,  "desc": "Metro expense",     "amount": 1700, "category": "Transport",     "date": "2026-06-17" },
-    { "id": 4,  "desc": "Electricity bill",  "amount": 1800, "category": "Home",          "date": "2026-06-15" },
-    { "id": 5,  "desc": "Medicine",          "amount": 950,  "category": "Health",        "date": "2026-06-12" },
-    { "id": 6,  "desc": "Restaurant dinner", "amount": 1400, "category": "Food",          "date": "2026-06-10" },
-    { "id": 7,  "desc": "Gym membership",    "amount": 1200, "category": "Health",        "date": "2026-06-08" },
-    { "id": 8,  "desc": "Amazon order",      "amount": 2199, "category": "Shopping",      "date": "2026-06-06" },
-    { "id": 9,  "desc": "Uber rides",        "amount": 850,  "category": "Transport",     "date": "2026-06-04" },
-    { "id": 10, "desc": "Coffee shop",       "amount": 620,  "category": "Food",          "date": "2026-06-02" },
-    { "id": 11, "desc": "Rent",              "amount": 12000,"category": "Home",          "date": "2026-06-01" },
-    { "id": 12, "desc": "Movie tickets",     "amount": 780,  "category": "Entertainment", "date": "2026-05-28" },
-    { "id": 13, "desc": "Vegetables",        "amount": 480,  "category": "Food",          "date": "2026-05-25" },
-    { "id": 14, "desc": "Internet bill",     "amount": 999,  "category": "Home",          "date": "2026-05-22" },
-    { "id": 15, "desc": "Shoes",             "amount": 2800, "category": "Shopping",      "date": "2026-05-20" }
+    {
+      "id": "1",
+      "desc": "Groceries",
+      "amount": 3200,
+      "category": "Food",
+      "date": "2026-06-20"
+    },
+    {
+      "id": "2",
+      "desc": "Netflix",
+      "amount": 649,
+      "category": "Entertainment",
+      "date": "2026-06-18"
+    },
+    {
+      "id": "3",
+      "desc": "Metro expense",
+      "amount": 1700,
+      "category": "Transport",
+      "date": "2026-06-17"
+    },
+    {
+      "id": "4",
+      "desc": "Electricity bill",
+      "amount": 1800,
+      "category": "Home",
+      "date": "2026-06-15"
+    },
+    {
+      "id": "5",
+      "desc": "Medicine",
+      "amount": 950,
+      "category": "Health",
+      "date": "2026-06-12"
+    },
+    {
+      "id": "6",
+      "desc": "Restaurant dinner",
+      "amount": 1400,
+      "category": "Food",
+      "date": "2026-06-10"
+    },
+    {
+      "id": "7",
+      "desc": "Gym membership",
+      "amount": 1200,
+      "category": "Health",
+      "date": "2026-06-08"
+    },
+    {
+      "id": "8",
+      "desc": "Amazon order",
+      "amount": 2199,
+      "category": "Shopping",
+      "date": "2026-06-06"
+    },
+    {
+      "id": "9",
+      "desc": "Uber rides",
+      "amount": 850,
+      "category": "Transport",
+      "date": "2026-06-04"
+    },
+    {
+      "id": "10",
+      "desc": "Coffee shop",
+      "amount": 620,
+      "category": "Food",
+      "date": "2026-06-02"
+    },
+    {
+      "id": "11",
+      "desc": "Rent",
+      "amount": 12000,
+      "category": "Home",
+      "date": "2026-06-01"
+    },
+    {
+      "id": "12",
+      "desc": "Movie tickets",
+      "amount": 780,
+      "category": "Entertainment",
+      "date": "2026-05-28"
+    },
+    {
+      "id": "13",
+      "desc": "Vegetables",
+      "amount": 480,
+      "category": "Food",
+      "date": "2026-05-25"
+    },
+    {
+      "id": "14",
+      "desc": "Internet bill",
+      "amount": 999,
+      "category": "Home",
+      "date": "2026-05-22"
+    },
+    {
+      "id": "15",
+      "desc": "Shoes",
+      "amount": 2800,
+      "category": "Shopping",
+      "date": "2026-05-20"
+    }
   ],
   "incomes": [
-    { "id": 1, "desc": "Salary",            "amount": 55000, "category": "Salary",    "date": "2026-06-01" },
-    { "id": 2, "desc": "Freelance project", "amount": 12000, "category": "Freelance", "date": "2026-06-10" },
-    { "id": 3, "desc": "Stock dividend",    "amount": 3200,  "category": "Business",  "date": "2026-06-15" },
-    { "id": 4, "desc": "Youtube adsense",   "amount": 1850,  "category": "Business",  "date": "2026-06-18" },
-    { "id": 5, "desc": "Bonus",             "amount": 8500,  "category": "Salary",    "date": "2026-05-25" }
-  ]
+    {
+      "id": "1",
+      "desc": "Salary",
+      "amount": 55000,
+      "category": "Salary",
+      "date": "2026-06-01"
+    },
+    {
+      "id": "2",
+      "desc": "Freelance project",
+      "amount": 12000,
+      "category": "Freelance",
+      "date": "2026-06-10"
+    },
+    {
+      "id": "3",
+      "desc": "Stock dividend",
+      "amount": 3200,
+      "category": "Business",
+      "date": "2026-06-15"
+    },
+    {
+      "id": "4",
+      "desc": "Youtube adsense",
+      "amount": 1850,
+      "category": "Business",
+      "date": "2026-06-18"
+    },
+    {
+      "id": "5",
+      "desc": "Bonus",
+      "amount": 8500,
+      "category": "Salary",
+      "date": "2026-05-25"
+    },
+    {
+      "desc": "hometutuion",
+      "amount": "2000",
+      "date": "2026-07-02",
+      "category": "Business",
+      "id": "fFeFoMHXxrc"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -1,3 +1,4 @@
+let transactions=[];
 async function init() {
     // fetch both from json-server
     const expRes  = await fetch("http://localhost:3000/expenses");
@@ -15,7 +16,7 @@ async function init() {
     drawChart(expenses);
 
     // transactions must be INSIDE init() — expenses/incomes exist only here
-    const transactions = [
+     transactions = [
         ...expenses.map(expense => ({ ...expense, type: "expense" })),
         ...incomes.map(income  => ({ ...income,  type: "income"  }))
     ];
@@ -79,14 +80,41 @@ const calc_savingRate = (incomes, expenses) => {
     document.getElementById("savings-rate").innerHTML = `<p>${per.toFixed(2)}%</p>`;
     return per;
 };
+///transaction logic:
+let currentPage=1;
+const itemsPerPage=5;
+//both left and right button
+const leftBtn=document.getElementById("left")
+leftBtn.addEventListener(
+    "click",
+    function(){
+        currentPage--;
+        renderlist(transactions);
+    }
+)
+const rightBtn=document.getElementById("right")
+rightBtn.addEventListener(
+    "click",
+    function(){
+        currentPage++;
+        renderlist(transactions);
+    }
+)
+const totalPages=()=>{
+    let page=Math.ceil(transaction.length/itemsPerPage);
+    return page
+}
 
 
 // render transaction list
 const renderlist = (transactions) => {
     const tList = document.getElementById("transaction-list");
     tList.innerHTML = "";
-
-    transactions.forEach(transaction => {
+    const start=(currentPage-1)*itemsPerPage;
+    const end=start+itemsPerPage;
+    const visible=transactions.slice(start,end);
+    
+     visible.forEach(transaction => {
         const li          = document.createElement("li");
         const sign        = transaction.type === "income" ? "+" : "-";
         const amountClass = transaction.type === "income" ? "amount-income" : "amount-expense";
@@ -104,7 +132,12 @@ const renderlist = (transactions) => {
                 ${sign}₹${Number(transaction.amount).toLocaleString("en-IN")}
             </span>
         `;
-
+        leftBtn.disabled=currentPage===1;
+        rightBtn.disabled=currentPage===(totalPages-1);
+        console.log(currentPage);
+        const countBtn=document.getElementById("count");
+        countBtn.innerHTML='';
+        countBtn.innerHTML=`<span>${currentPage}</span>`;
         tList.appendChild(li);
     });
 };

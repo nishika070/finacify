@@ -4,10 +4,11 @@ const resetnull = () => {
     document.getElementById("expense-date").value = "";
     document.getElementById("expense-category").value = "";
 };
+let expenses=[];
 
 const load = async () => {
     const res = await fetch("http://localhost:3000/expenses");
-    const expenses = await res.json();
+    expenses = await res.json();
     return expenses;
 };
 let selectedId=null;
@@ -43,7 +44,7 @@ expenseBtn.addEventListener("click", async function () {
 
     }
     else{
-            await fetch("http://localhost:3000/expenses", {
+        await fetch("http://localhost:3000/expenses", {
         method: "POST",
         headers: { "Content-Type": "files/json" },
         body: JSON.stringify(expense)
@@ -61,6 +62,32 @@ expenseBtn.addEventListener("click", async function () {
 
 
 // Render Transaction List
+///transaction logic:
+
+//both left and right button
+const leftBtn=document.getElementById("left")
+leftBtn.addEventListener(
+    "click",
+    function(){
+        currentPage--;
+        renderlist(expenses);
+    }
+)
+const rightBtn=document.getElementById("right")
+rightBtn.addEventListener(
+    "click",
+    function(){
+        currentPage++;
+        renderlist(expenses);
+    }
+)
+let currentPage=1;
+const itemsPerPage=5;
+const totalPages=()=>{
+    let page=Math.ceil(expenses.length/itemsPerPage);
+    return page
+}
+
 
 const renderlist = (expenses) => {
 
@@ -73,10 +100,20 @@ const renderlist = (expenses) => {
     }
     
     
-    expenses.forEach(expense => {
+    const start=(currentPage-1)*itemsPerPage;
+    const end=start+itemsPerPage;
+    leftBtn.disabled=currentPage===1;
+    rightBtn.disabled = currentPage >= totalPages();
+    console.log(currentPage);
+    const countBtn=document.getElementById("count");
+    countBtn.innerHTML='';
+    countBtn.innerHTML=`<span>${currentPage}</span>`;
+    visible=expenses.slice(start,end);
+    visible.forEach(expense => {
         const li = document.createElement("li");
         const desc = expense.desc;
         const amount = expense.amount;
+        
         li.addEventListener(
         "click",
         function(){
@@ -89,6 +126,7 @@ const renderlist = (expenses) => {
         })
         
         li.innerHTML = `<span>${desc}</span> <span>₹${Number(amount).toLocaleString("en-IN")}</span>`;
+        
         expenseList.appendChild(li);
     });
 
@@ -180,4 +218,14 @@ searchBtn.addEventListener("input", async function () {
 
     renderlist(newexpenses);
 
+});
+const selection=["Food","Travel","Shopping","Health","Bills","Education","Entertainment"]
+const categoryList=document.getElementById("expense-category")
+categoryList.innerHTML="";
+selection.forEach(category => {
+    const option=document.createElement("option");
+    option.value=category;
+    option.textContent=category;
+    categoryList.appendChild(option);
+    
 });

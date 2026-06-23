@@ -6,7 +6,6 @@ const resetnull = () => {
     document.getElementById("income-category").value = "";
 };
 
-
 // load() — localStorage hataya, ab json-server se fetch karta hai
 // async isliye ki fetch() Promise return karta hai, await chahiye
 const load = async () => {
@@ -20,7 +19,7 @@ const load = async () => {
 // isliye async function mein wrap kiya, phir call kiya
 async function init() {
     const incomes = await load();
-    renderlist(incomes);
+    renderlist(incomes.slice(0,5));
 }
 
 init();
@@ -85,6 +84,32 @@ incomeBtn.addEventListener("click", async function () {
 
 
 // Render List — koi change nahi, same logic
+///transaction logic:
+let currentPage=1;
+const itemsPerPage=5;
+//both left and right button
+const leftBtn=document.getElementById("left")
+leftBtn.addEventListener(
+    "click",
+    function(){
+        currentPage--;
+        renderlist(transactions);
+    }
+)
+const rightBtn=document.getElementById("right")
+rightBtn.addEventListener(
+    "click",
+    function(){
+        currentPage++;
+        renderlist(transactions);
+    }
+)
+const totalPages=()=>{
+    let page=Math.ceil(transaction.length/itemsPerPage);
+    return page
+}
+
+
 const renderlist = (incomes) => {
 
     const incomeList = document.getElementById("income-list");
@@ -102,9 +127,9 @@ const renderlist = (incomes) => {
         li.addEventListener("click",
         function(){
             selectedId=income.id;
-            document.getElementById("income-desc").value=income.desc;
-            document.getElementById("income-amount").value=income.amount;
-            document.getElementById("income-date").value=income.date;
+            document.getElementById("income-desc").value=    income.desc;
+            document.getElementById("income-amount").value=  income.amount;
+            document.getElementById("income-date").value=    income.date;
             document.getElementById("income-category").value=income.category;
             }
     )
@@ -112,6 +137,12 @@ const renderlist = (incomes) => {
     <span>${desc}</span>
     <span>₹${Number(amount).toLocaleString("en-IN")}</span>
     </div>`
+    leftBtn.disabled=currentPage===1;
+        rightBtn.disabled=currentPage===(totalPages-1);
+        console.log(currentPage);
+        const countBtn=document.getElementById("count");
+        countBtn.innerHTML='';
+        countBtn.innerHTML=`<span>${currentPage}</span>`;
         incomeList.appendChild(li);
     });
 
@@ -196,4 +227,15 @@ searchBtn.addEventListener("input", async function () {
 
     renderlist(newincomes);
 
+});
+//list render
+const selection=["Salary","Freelance","Business","Gift","Other"]
+const categoryList=document.getElementById("income-category")
+categoryList.innerHTML="";
+selection.forEach(category => {
+    const option=document.createElement("option");
+    option.value=category;
+    option.textContent=category;
+    categoryList.appendChild(option);
+    
 });
